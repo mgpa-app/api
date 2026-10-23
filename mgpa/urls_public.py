@@ -14,7 +14,7 @@ from django.conf.urls.static import static
 
 
 router = SimpleRouter()
-router.register('client', ClientViewSet)
+router.register('', ClientViewSet)
 router.register('abonnement-ese', ClientAbonneViewset)
 router.register('montant-abonnement', MontAbonViews)
 
