@@ -156,6 +156,7 @@ MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
     'mgpa.middleware.ClientMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -257,11 +258,15 @@ USE_TZ = True
 # MEDIA_URL = 'media/'
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    ]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     ]
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Email
