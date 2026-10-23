@@ -14,8 +14,8 @@ from django.conf.urls.static import static
 
 
 router = SimpleRouter()
-router.register('https://mgpa-api-jyeu.onrender.com/client', ClientViewSet) 
-router.register('mgpa-api-jyeu.onrender.com/client', ClientViewSet)
+# router.register('https://mgpa-api-jyeu.onrender.com/client', ClientViewSet) 
+# router.register('mgpa-api-jyeu.onrender.com/cliente', ClientViewSet)
 router.register('client', ClientViewSet)
 router.register('abonnement-ese', ClientAbonneViewset)
 router.register('montant-abonnement', MontAbonViews)
