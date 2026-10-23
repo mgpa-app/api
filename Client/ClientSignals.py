@@ -1,5 +1,6 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.conf import settings
 from Client.models import Clients, Domain, AbonneClient
 from django.template.loader import render_to_string
 
@@ -8,14 +9,18 @@ from django.template.loader import render_to_string
 def CreateTenant(sender, instance, created, **kwargs):
     if not created:
         dom = Domain.objects.filter(tenant_id = instance.id_enreg).first()
+        # domaine =  instance.nom_domaine + ".mgpa.app"   
         # dom.domain = instance.nom_domaine + ".localhost"  
-        dom.domain = instance.nom_domaine + ".mgpa.app"  
+        ledom = settings.RENDER_EXTERNAL_HOSTNAME
+        dom.domain = instance.nom_domaine + "."+ ledom
         dom.save()
 
     else: 
         domain = Domain()
-        # domaine =  instance.nom_domaine + ".localhost"   # LE SOUS DOMAINE DE L'ENTREPRISE #
-        domaine =  instance.nom_domaine + ".mgpa.app"   # LE SOUS DOMAINE DE L'ENTREPRISE #
+        # domaine =  instance.nom_domaine + ".mgpa.app"   
+        # dom.domain = instance.nom_domaine + ".localhost"  
+        ledom = settings.RENDER_EXTERNAL_HOSTNAME
+        domaine =  instance.nom_domaine + "." + ledom   # LE SOUS DOMAINE DE L'ENTREPRISE #
         domain.domain = domaine
         domain.tenant = instance     # domain.tenant = client
         domain.is_primary = True
