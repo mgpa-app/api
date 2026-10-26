@@ -17,15 +17,15 @@ from django_tenants.utils import (
 )
 
 def get_hostname(request):
-    # return request.get_host().split('/', 3)[2].lower()
-    return request.get_host().split(':')[0].lower()
+    return request.get_host().split('/', 3)[2].lower()
+    # return request.get_host().split(':')[0].lower()
 
 
 
 def get_tenant(request):
     hostname  = get_hostname(request)
-    # subdomain = hostname.split('.', 3)[1]
-    subdomain = hostname.split('.')[0]
+    subdomain = hostname.split('.', 3)[1]
+    # subdomain = hostname.split('.')[0]
     return Clients.objects.filter(schema_name=subdomain).first()
 
 
