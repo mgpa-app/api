@@ -31,6 +31,8 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
+# ALLOWED_HOSTS = []
+
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -77,6 +79,7 @@ TENANT_APPS = [
     'Mgpausers',
     'Matroulant',
     'Compteur',
+    'Preventive',
     'guardian',
     # 'drf_spectacular',
     
@@ -126,9 +129,9 @@ DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
     'SET_USERNAME_RETYPE': True,
     'SET_PASSWORD_RETYPE': True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'api/auth/users/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'api/auth/users/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'api/auth/users/activation/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
         'user_create': 'Mgpausers.MgpauserSerializer.UserCreateSerializer',
@@ -214,9 +217,9 @@ DATABASES = {
 
     }
 }
-DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
+# DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
 
-DATABASES["default"]['ENGINE'] = 'django_tenants.postgresql_backend'
+# DATABASES["default"]['ENGINE'] = 'django_tenants.postgresql_backend'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators

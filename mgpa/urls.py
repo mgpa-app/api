@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from Entreprise.views import EseValidation, ImportOrgFonctView, CreateOrganFonct, ListOrganFonct, UpdateOrganFonct, DelOrganFonct
+from Entreprise.views import EseValidation, ImportOrgFonctView, CreateOrganFonct, ListOrganFonct, UpdateOrganFonct, DelOrganFonct, \
+    CreatePieceRechange, CreatePrestations,ListPieceRechange, ListPrestations, DeletePieceRechange, DeletePrestations, UpdatePieceRechange, \
+        UpdatePrestations
 from django.conf import settings
 from Compteur.views import CompteurCreate, AlertEpViewSet, ListAlertEp, ListCountEpCritiq
 from rest_framework_nested import routers
@@ -44,6 +46,32 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+
+
+    path('creer-prestations', CreatePrestations.as_view(), name='creer-prestations'),
+    path('list-prestations', ListPrestations.as_view(), name='list-prestations'),
+    path('delete-prestations/<str:pk>', DeletePrestations.as_view(), name='delete-prestations'),
+    path('update-prestations/<str:pk>', UpdatePrestations.as_view(), name='update-prestations'),
+
+
+    path('creer-piece', CreatePieceRechange.as_view(), name='creer-piece'),
+    path('list-piece', ListPieceRechange.as_view(), name='list-piece'),
+    path('delete-piece/<str:pk>', DeletePieceRechange.as_view(), name='delete-piece'),
+    path('update-piece/<str:pk>', UpdatePieceRechange.as_view(), name='update-piece'),
+
+    path("depassement-ep/", ListCountEpCritiq.as_view(), name="depassement-ep"),
+    
+    
+    # path("dt-ep/", DTEpCreate.as_view(), name="dt-ep"),
+
+    # path("list-dt-ep/", ListDTEp.as_view(), name="list-dt-ep"),
+
+    # path('alerts-ep/', ListAlertEp.as_view(), name='alerts-ep'),
+
+    # path('suivi-ep/', ListSuiviEp.as_view(), name='suivi-ep'),
+
+    
 
 
 ] + router.urls + engin_router.urls

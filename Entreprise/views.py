@@ -7,8 +7,8 @@ from rest_framework import status
 import pandas as pd
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
-from .models import ValidationElement, Eses, NumPrefix, Organigramme
-from .EntrepriseSerializer import ValidationSerializer, EseSerializer, NumPrefixSerializer, AbonnementSerializer, OrganigramSerializer, ImportOrgFonctSerializer
+from .models import ValidationElement, Eses, NumPrefix, Organigramme, PieceRechange, Prestations
+from .EntrepriseSerializer import ValidationSerializer, EseSerializer, NumPrefixSerializer, AbonnementSerializer, OrganigramSerializer, ImportOrgFonctSerializer, PrestationSerializer, PieceRechangeSerializer
 from Client.models import AbonneClient, Clients
 from Client.ClientSerializers import AbonneClientSerializer
 import secrets
@@ -386,6 +386,7 @@ class DelOrganFonct(DestroyAPIView):
     parser_classes = [FormParser, MultiPartParser]
     queryset = Organigramme.objects.all()
     serializer_class = OrganigramSerializer
+    lookup_field = 'pk'
 
 
 class ImportOrgFonctView(APIView):
@@ -481,3 +482,56 @@ class ImportOrgFonctView(APIView):
                 'message': "Fichier des organigammes importé avec succès.",
                 
             }, status=status.HTTP_201_CREATED)
+
+
+# CRUD POUR LES PRESTATIONS
+
+class ListPrestations(ListAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = Prestations.objects.all()
+    serializer_class = PrestationSerializer
+
+
+class CreatePrestations(CreateAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = Prestations.objects.all()
+    serializer_class = PrestationSerializer
+
+
+class UpdatePrestations(RetrieveUpdateAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = Prestations.objects.all()
+    serializer_class = PrestationSerializer
+
+
+class DeletePrestations(DestroyAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = Prestations.objects.all()
+    serializer_class = PrestationSerializer
+
+
+
+# CRUD POUR LES PIECES DE RECHANGE
+
+class ListPieceRechange(ListAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = PieceRechange.objects.all()
+    serializer_class = PieceRechangeSerializer
+
+
+class CreatePieceRechange(CreateAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = PieceRechange.objects.all()
+    serializer_class = PieceRechangeSerializer
+
+
+class UpdatePieceRechange(RetrieveUpdateAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = PieceRechange.objects.all()
+    serializer_class = PieceRechangeSerializer
+
+
+class DeletePieceRechange(DestroyAPIView):
+    parser_classes = [FormParser, MultiPartParser]
+    queryset = PieceRechange.objects.all()
+    serializer_class = PieceRechangeSerializer

@@ -18,7 +18,7 @@ def CreateTenant(sender, instance, created, **kwargs):
     else: 
         domain = Domain()
         # domaine =  instance.nom_domaine + ".mgpa.app"   
-        # dom.domain = instance.nom_domaine + ".localhost"  
+        # domaine = instance.nom_domaine + ".localhost"  
         ledom = settings.RENDER_EXTERNAL_HOSTNAME
         domaine =  instance.nom_domaine + "." + ledom   # LE SOUS DOMAINE DE L'ENTREPRISE #
         domain.domain = domaine
