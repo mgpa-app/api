@@ -217,9 +217,9 @@ DATABASES = {
 
     }
 }
-# DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
+DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
 
-# DATABASES["default"]['ENGINE'] = 'django_tenants.postgresql_backend'
+DATABASES["default"]['ENGINE'] = 'django_tenants.postgresql_backend'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
