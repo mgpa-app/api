@@ -55,6 +55,8 @@ SHARED_APPS = [
     'drf_spectacular',
     'Client',
     'Entreprise',
+    'cloudinary',
+    'cloudinary_storage',
     
     
     
@@ -81,6 +83,8 @@ TENANT_APPS = [
     'Compteur',
     'Preventive',
     'guardian',
+    'cloudinary',
+    'cloudinary_storage',
     # 'drf_spectacular',
     
     
@@ -262,14 +266,22 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+CLOUDINARY_STORAGE = {
+  'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+  'API_KEY': config('CLOUDINARY_API_KEY'),
+  'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
 
 
 # Email
