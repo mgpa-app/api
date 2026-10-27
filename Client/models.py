@@ -33,7 +33,7 @@ class Clients(TenantMixin):
     pays                = models.CharField("Pays Entreprise", max_length=255, blank=True, null=True)
     phone1              = models.CharField("N° Telephone 1", blank=True, null=True)
     phone2              = models.CharField ("N° Telephone 2", blank=True, null=True)
-    logo_ese            = models.ImageField("Logo Entreprise", upload_to='logos/', null=True, blank=True, default="logo.jpeg")
+    logo_ese            = models.ImageField("Logo Entreprise", upload_to='logos', null=True, blank=True, default="logo.jpeg")
     ese_activate        = models.BooleanField("Activation Entreprise", default=False)
     auto_create_schema  = True
     auto_drop_schema    = True

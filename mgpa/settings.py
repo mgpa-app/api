@@ -276,12 +276,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-CLOUDINARY_STORAGE = {
-  'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-  'API_KEY': config('CLOUDINARY_API_KEY'),
-  'API_SECRET': config('CLOUDINARY_API_SECRET'),
-}
 
+# CLOUDINARY_STORAGE = {
+#   'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+#   'API_KEY': config('CLOUDINARY_API_KEY'),
+#   'API_SECRET': config('CLOUDINARY_API_SECRET'),
+# }
+
+CLOUDINARY_STORAGE = {
+  'CLOUD_NAME': 's9etftyh',
+  'API_KEY': '518471886313658',
+  'API_SECRET': 'Qh1zBKofiF1Cc_1IJe1hGBL5NWM',
+}
 
 
 # Email
