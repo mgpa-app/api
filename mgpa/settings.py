@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+from environ import Env
 import dj_database_url
+
+env = Env()
+Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -283,10 +287,17 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 #   'API_SECRET': config('CLOUDINARY_API_SECRET'),
 # }
 
+# CLOUDINARY_STORAGE = {
+#   'CLOUD_NAME': 's9etftyh',
+#   'API_KEY': '518471886313658',
+#   'API_SECRET': 'Qh1zBKofiF1Cc_1IJe1hGBL5NWM',
+  
+# }
+
+
 CLOUDINARY_STORAGE = {
-  'CLOUD_NAME': 's9etftyh',
-  'API_KEY': '518471886313658',
-  'API_SECRET': 'Qh1zBKofiF1Cc_1IJe1hGBL5NWM',
+  'CLOUDINARY_URL': env('CLOUDINARY_URL'),
+  
 }
 
 
