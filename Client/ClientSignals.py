@@ -5,22 +5,26 @@ from Client.models import Clients, Domain, AbonneClient
 from django.template.loader import render_to_string
 
 
+
 @receiver(post_save, sender=Clients)
 def CreateTenant(sender, instance, created, **kwargs):
     if not created:
         dom = Domain.objects.filter(tenant_id = instance.id_enreg).first()
-        # domaine =  instance.nom_domaine + ".mgpa.app"   
-        # dom.domain = instance.nom_domaine + ".localhost"  
-        ledom = settings.RENDER_EXTERNAL_HOSTNAME
-        dom.domain = instance.nom_domaine + "."+ ledom
+        if settings.ENVIRONMENT == 'development':        
+            dom.domain = instance.nom_domaine + ".localhost"  
+        else:
+            dom.domain = instance.nom_domaine + "."+ settings.RENDER_EXTERNAL_HOSTNAME
+            # domaine =  instance.nom_domaine + ".mgpa.app"  
         dom.save()
 
     else: 
         domain = Domain()
-        # domaine =  instance.nom_domaine + ".mgpa.app"   
-        # domaine = instance.nom_domaine + ".localhost"  
-        ledom = settings.RENDER_EXTERNAL_HOSTNAME
-        domaine =  instance.nom_domaine + "." + ledom   # LE SOUS DOMAINE DE L'ENTREPRISE #
+        if settings.ENVIRONMENT == 'development':         
+            domaine = instance.nom_domaine + ".localhost"  
+        else:
+            domaine =  instance.nom_domaine + "." + settings.RENDER_EXTERNAL_HOSTNAME   # LE SOUS DOMAINE DE L'ENTREPRISE #
+            # domaine =  instance.nom_domaine + ".mgpa.app" 
+
         domain.domain = domaine
         domain.tenant = instance     # domain.tenant = client
         domain.is_primary = True
