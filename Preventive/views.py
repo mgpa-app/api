@@ -31,8 +31,12 @@ class ListSuiviEp(ListAPIView):
         if my_user.type == "CHEF_SMRLT":  
             return SuiviEp.objects.filter(site_matrlt_id=my_user.site_id)
 
-        elif my_user.type in liste_oper:       
-            return SuiviEp.objects.filter(vehicule__affectation__contains=my_user.site)
+        elif my_user.type in liste_oper:  
+            # suivis = SuiviEp.objects.all()
+            org = Organigramme.objects.filter(id=my_user.site_id).first().organigramme
+            # for suivi in suivis:
+            #     if my_user.site     
+            return SuiviEp.objects.filter(vehicule__affectation_organigramme__contains=org)
 
         elif my_user.type in liste_gest:
             return SuiviEp.objects.all()

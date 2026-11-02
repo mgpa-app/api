@@ -19,7 +19,7 @@ def CreateTenant(sender, instance, created, **kwargs):
         
         schema_name = str(instance.identite).split('_')[0].lower()
         code = AbonnementEse.objects.filter(schema_name=schema_name).first().code
-        list_categ = [('PL1', 130.0), ('PL2', 9500.0), ('VL', 4700.0), ('VT', 4700.0), ('MN', 230.0), ('GC', 230.0)]
+        list_categ = [('PL1', 130.0), ('PL2', 9500.0), ('VL', 4700.0), ('VT', 4700.0), ('EM', 230.0), ('EGC', 230.0)]
         for categ in list_categ:
             if categ[0] == cat:
                 param_alert['schema_name'] = schema_name

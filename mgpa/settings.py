@@ -20,7 +20,7 @@ env = Env()
 Env.read_env()
 
 ENVIRONMENT = env('ENVIRONMENT', default="production")
-# ENVIRONMENT = 'development'
+ENVIRONMENT = 'development'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -43,9 +43,16 @@ else:
 
 # DEBUG = config('DEBUG', cast=bool)
 
-# ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+# ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'mgpa-api-jyeu.onrender.com']
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://mgpa.app',
+#     'https://www.mgpa.app',
+# ]
+
+ALLOWED_HOSTS = ['*']
+
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'mgpa-api-jyeu.onrender.com', 'mgpa.app', 'www.mgpa.app',]
 
 if ENVIRONMENT == "production":
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')

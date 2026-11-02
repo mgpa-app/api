@@ -57,8 +57,8 @@ class ImportEnginView(APIView):
                     nbre_pl1 = VehiculesEses.objects.filter(categorie='PL1').count()
                     nbre_pl2 = VehiculesEses.objects.filter(categorie='PL2').count()
                     nbre_vl = VehiculesEses.objects.filter(categorie='VL').count()
-                    nbre_mn = VehiculesEses.objects.filter(categorie='MN').count()
-                    nbre_gc = VehiculesEses.objects.filter(categorie='GC').count()
+                    nbre_mn = VehiculesEses.objects.filter(categorie='EM').count()
+                    nbre_gc = VehiculesEses.objects.filter(categorie='EGC').count()
                     max_pl1 = int(abon.nbre_pl1)
                     max_pl2 = int(abon.nbre_pl2)
                     max_vl = int(abon.nbre_vl)
@@ -86,10 +86,10 @@ class ImportEnginView(APIView):
                             if cat == "VL":
                                 booll = nbre_vl < max_vl
                                 
-                            if cat == "MN":
+                            if cat == "EM":
                                 booll = nbre_mn < max_mn
             
-                            if cat == "GC":
+                            if cat == "EGC":
                                 booll = nbre_gc < max_gc
             
                             if booll:
@@ -162,9 +162,9 @@ class ImportEnginView(APIView):
 
                                     matrlt = Organigramme.objects.filter(organigramme=pole_matrlt).first()
                                     if matrlt != None:
-                                        vehicule['site_matrlt'] = matrlt.id
+                                        vehicule['site_matrlt'] = pole_matrlt
                                     else:
-                                        vehicule['site_matrlt'] = None
+                                        vehicule['site_matrlt'] = ""
 
                                     
                                     position = ""
@@ -175,7 +175,7 @@ class ImportEnginView(APIView):
                                     organig = Organigramme.objects.filter(organigramme=position).first()
                                     
                                     if organig != None:
-                                        vehicule['affectation'] = organig.id                        
+                                        vehicule['affectation'] = position                        
                                         iden = ""
                                         iden += "".join(client.schema_sigle.upper())                        
                                         iden += "".join("_")
@@ -194,7 +194,7 @@ class ImportEnginView(APIView):
                                     
                                     else:
                                         
-                                        vehicule['affectation'] = None                        
+                                        vehicule['affectation'] = ""                        
                                         iden = ""
                                         iden += "".join(client.schema_sigle.upper())                        
                                         iden += "".join("_")
@@ -225,11 +225,11 @@ class ImportEnginView(APIView):
                                         nbre_vl += 1
                                         enreg_vl += 1
 
-                                    elif cat == "MN":
+                                    elif cat == "EM":
                                         nbre_mn += 1
                                         enreg_mn += 1
 
-                                    elif cat == "GC":
+                                    elif cat == "EGC":
                                         nbre_gc += 1
                                         enreg_gc += 1
 
@@ -295,8 +295,8 @@ class VehiculeViewSet(ModelViewSet):
                 nbre_pl1 = VehiculesEses.objects.filter(categorie='PL1').count()
                 nbre_pl2 = VehiculesEses.objects.filter(categorie='PL2').count()
                 nbre_vl = VehiculesEses.objects.filter(categorie='VL').count()
-                nbre_mn = VehiculesEses.objects.filter(categorie='MN').count()
-                nbre_gc = VehiculesEses.objects.filter(categorie='GC').count()
+                nbre_mn = VehiculesEses.objects.filter(categorie='EM').count()
+                nbre_gc = VehiculesEses.objects.filter(categorie='EGC').count()
                 
 
                 max_pl1 = int(abon.nbre_pl1)
@@ -324,16 +324,20 @@ class VehiculeViewSet(ModelViewSet):
                     if cat == "VL":
                         booll = nbre_vl < max_vl
                         
-                    if cat == "MN":
+                    if cat == "EM":
                         booll = nbre_mn < max_mn
 
-                    if cat == "GC":
+                    if cat == "EGC":
                         booll = nbre_gc < max_gc
 
                     if booll:
 
-                        org = Organigramme.objects.get(id=request.data["affectation"]).organigramme
+                        org = Organigramme.objects.get(id=request.data["site_vehicule"]).organigramme
+                        print(org)
+                        print("*******************************************\n")
+                        datas["affectation"] = str(org)
                         schemas = str(org).split('_')[0]
+                        print(schemas)
                         organ = str(org).split(schemas)
 
                         datas["identite"] = schemas 
@@ -363,11 +367,11 @@ class VehiculeViewSet(ModelViewSet):
                             nbre_vl += 1
                             enreg_vl += 1
                     
-                        elif cat == "MN":
+                        elif cat == "EM":
                             nbre_mn += 1
                             enreg_mn += 1
                     
-                        elif cat == "GC":
+                        elif cat == "EGC":
                             nbre_gc += 1
                             enreg_gc += 1
                         

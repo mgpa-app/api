@@ -6,14 +6,16 @@ from Mgpausers.MgpauserSerializer import UserCreateSerializer
 
 
 class VehSerializer(serializers.ModelSerializer):
-    affectation = OrganigramSerializer
+    site_vehicule = OrganigramSerializer
     conducteurs = UserCreateSerializer
+    
     class Meta:
         model = VehiculesEses
         fields =["id", "num_parc", "immat", "typecompteur", "categorie", "type", "marque", "model", "energie", "puissance", 
-        "serie", "branding", "date_mse", "statut", "affectation", "conducteurs", "identite", "site_matrlt"]
+        "serie", "branding", "date_mse", "statut", "site_vehicule", "affectation", "conducteurs", "identite", "site_matrlt"]
         
-        # read_only_fields = ["identite"]
+        read_only_fields = ["identite", "affectation"]
+        required_fields = ["identite", "affectation"]
 
 
 

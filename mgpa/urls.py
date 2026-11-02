@@ -3,7 +3,8 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from Entreprise.views import EseValidation, ImportOrgFonctView, CreateOrganFonct, ListOrganFonct, UpdateOrganFonct, DelOrganFonct, \
     CreatePieceRechange, CreatePrestations,ListPieceRechange, ListPrestations, DeletePieceRechange, DeletePrestations, UpdatePieceRechange, \
-        UpdatePrestations
+    UpdatePrestations
+from Preventive.views import ListSuiviEp
 from django.conf import settings
 from Compteur.views import CompteurCreate, AlertEpViewSet, ListAlertEp, ListCountEpCritiq
 from rest_framework_nested import routers
@@ -67,9 +68,9 @@ urlpatterns = [
 
     # path("list-dt-ep/", ListDTEp.as_view(), name="list-dt-ep"),
 
-    # path('alerts-ep/', ListAlertEp.as_view(), name='alerts-ep'),
+    path('alerts-ep/', ListAlertEp.as_view(), name='alerts-ep'),
 
-    # path('suivi-ep/', ListSuiviEp.as_view(), name='suivi-ep'),
+    path('suivi-ep/', ListSuiviEp.as_view(), name='suivi-ep'),
 
     
 

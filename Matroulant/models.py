@@ -38,8 +38,8 @@ class VehiculesEses(models.Model):
         ("PL1", "POIDS LOURD 1GEN"),
         ("PL2", "POIDS LOURD 2GEN"),
         ("VL", "VEHICULE LEGER"),
-        ("MN", "MANUTENTION"),
-        ("GC", "GENIE CIVIL"),
+        ("EM", "ENGIN MANUTENTION"),
+        ("EGC", "ENGIN GENIE CIVIL"),
     ]
 
     ENERGIES = [
@@ -52,9 +52,9 @@ class VehiculesEses(models.Model):
     TypeStatut = [
         ("EN SERVICE", "EN SERVICE"),
         ("EN MAINTENANCE", "EN MAINTENANCE"),
-        ("EN REFORMATION", "EN REFORMATION"),
+        ("EN COURS DE REFORME", "EN COURS DE REFORME"),
         ("LITIGIEUX", "LITIGIEUX"),
-        ("HORS SERVICE", "HORS SERVICE"),
+        ("HORS SERVICE", "HORS SERVICE"), # motif (EPARVE, VENDU, REFORME)
         ("SINISTRE", "SINISTRE"),
         ("EN EP", "EN EP"),
     ]
@@ -72,8 +72,9 @@ class VehiculesEses(models.Model):
     branding              = models.CharField("BRANDING", max_length=255, null=True, blank=True)
     date_mse              = models.CharField("DATE DE SERVICE", null=True, blank=True)
     statut                = models.CharField("STATUT", max_length=50, blank=True, choices=TypeStatut, default="En SERVICE")
-    affectation           = models.ForeignKey(Organigramme, null=True, blank=True, on_delete=models.SET_NULL, related_name='affectations')
-    site_matrlt           = models.ForeignKey(Organigramme, null=True, blank=True, on_delete=models.SET_NULL, related_name='veh_site_matrlt')
+    site_vehicule         = models.ForeignKey(Organigramme, null=True, blank=True, on_delete=models.SET_NULL, related_name='site_vehicule')
+    affectation           = models.CharField("AFFECTATION", max_length=255, null=True, blank=True)
+    site_matrlt           = models.ForeignKey(Organigramme, null=True, blank=True, on_delete=models.SET_NULL, related_name='site_matrlt')
     conducteurs           = models.ManyToManyField(GlobalUser, blank=True, related_name="veh_conducteurs")
     identite              = models.CharField("IDENTITE", max_length=255, null=True, blank=True)
 

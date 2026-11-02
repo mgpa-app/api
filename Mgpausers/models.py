@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, AbstractUser
 from Entreprise.models import Organigramme
+from Entreprise.models import AbonnementEse
 
 
 
@@ -10,6 +11,92 @@ class UserAccountManager(BaseUserManager):
             raise ValueError("Vous devez fournir une adresse mail")
         if not password:
             raise ValueError('Vous devez fournir un mot de passe')
+
+        if type == "UTILISATEUR":
+            nbre_ab = AbonnementEse.objects.last().nusers_util
+            use = GlobalUser.objects.filter(type="UTILISATEUR").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "UTILISATEUR" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+        if type == "GARAGISTE":
+            nbre_ab = AbonnementEse.objects.last().nusers_gar
+            use = GlobalUser.objects.filter(type="GARAGISTE").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "GARAGISTE" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+        
+                    
+        if type == "MAGASINIER":
+            nbre_ab = AbonnementEse.objects.last().nusers_mag
+            use = GlobalUser.objects.filter(type="MAGASINIER").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "MAGASINIER" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+        
+
+        if type == "CHEF_SITE":
+            nbre_ab = AbonnementEse.objects.last().nusers_site
+            use = GlobalUser.objects.filter(type="CHEF_SITE").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "CHEF_SITE" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+        
+                    
+        if type == "CHEF_CTECH":
+            nbre_ab = AbonnementEse.objects.last().nusers_ctq
+            use = GlobalUser.objects.filter(type="CHEF_CTECH").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "CHEF_CTECH" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+        if type == "CHEF_AGENCE":
+            nbre_ab = AbonnementEse.objects.last().nusers_age
+            use = GlobalUser.objects.filter(type="CHEF_AGENCE").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "CHEF_AGENCE" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+        
+                    
+        if type == "CHEF_REGION":
+            nbre_ab = AbonnementEse.objects.last().nusers_reg
+            use = GlobalUser.objects.filter(type="CHEF_REGION").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "CHEF_REGION" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+        if type == "CHEF_SMRLT":
+            nbre_ab = AbonnementEse.objects.last().nusers_srm
+            use = GlobalUser.objects.filter(type="CHEF_SMRLT").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "CHEF_SMRLT" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+        if type == "DIR_EXPLOIT":
+            nbre_ab = AbonnementEse.objects.last().nusers_dex
+            use = GlobalUser.objects.filter(type="DIR_EXPLOIT").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "DIR_EXPLOIT" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+        if type == "DIR_OPER":
+            nbre_ab = AbonnementEse.objects.last().nusers_dop
+            use = GlobalUser.objects.filter(type="DIR_OPER").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "DIR_OPER" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+        
+
+        if type == "MASTER_DATA":
+            nbre_ab = AbonnementEse.objects.last().nusers_data
+            use = GlobalUser.objects.filter(type="MASTER_DATA").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "MASTER_DATA" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
+
+        if type == "DIR_GEN":
+            nbre_ab = AbonnementEse.objects.last().nusers_dg
+            use = GlobalUser.objects.filter(type="DIR_GEN").exists()
+            if use and use.count() >= nbre_ab:
+                return 'Le nombre maximum d\'utilisateur de type "DIR_GEN" est atteint, vous ne pouvez plus créer ce type d\'utilisateur'
+
+
 
         UserAccount = self.model(
             email = self.normalize_email(email),
