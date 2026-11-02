@@ -43,14 +43,14 @@ else:
 
 # DEBUG = config('DEBUG', cast=bool)
 
-# ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://mgpa.app',
-#     'https://www.mgpa.app',
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://mgpa.app',
+    'https://www.mgpa.app',
+]
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'mgpa-api-jyeu.onrender.com', 'mgpa.app', 'www.mgpa.app',]
 
