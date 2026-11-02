@@ -237,18 +237,18 @@ if ENVIRONMENT == 'development':
     DATABASES = {
         'default': {
             'ENGINE': 'django_tenants.postgresql_backend',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'HOST': env('DB_HOST'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'PORT': env('DB_PORT'),
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'HOST': config('DB_HOST'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'PORT': config('DB_PORT'),
 
         }
     }
 else:
     import dj_database_url
     DATABASES = {
-        "default" : dj_database_url.parse(env("DATABASE_URL"))
+        "default" : dj_database_url.parse(config("DATABASE_URL"))
     }
     DATABASES["default"]['ENGINE'] = 'django_tenants.postgresql_backend'
 
