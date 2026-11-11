@@ -23,8 +23,6 @@ class EseValidation(CreateAPIView):
     serializer_class = ValidationSerializer
     parser_classes =  [FormParser, MultiPartParser]
 
-    
-
     def create(self, request, *args, **kwargs):        
         data = request.data
         code_ese = data["code_ese"]
@@ -33,8 +31,7 @@ class EseValidation(CreateAPIView):
         abonne = AbonneClient.objects.filter(code=code_ese, is_active=True).first()
         # schem = AbonneClient.objects.values_list("schema_name", flat=True).first()
         
-        print("********************************************************\n")
-        print(abonne)
+
 
         # try:
         # with transaction.atomic():
@@ -53,7 +50,6 @@ class EseValidation(CreateAPIView):
 
                         # CREATION DU MODEL ENTREPRISE
                         client = abonne.ese
-                        # with tenant_context(client):
                         data_ese['nom_ese'] = nom_ese
                         data_ese['adresse_ese'] = abonne.ese.adresse
                         data_ese['abrev_ese']   = abonne.ese.schema_sigle
@@ -170,7 +166,6 @@ class EseValidation(CreateAPIView):
                         data_ab['montant_engins'] = round(serialized_data["montant_engins"], 0)
                         data_ab['montant_users'] = round(serialized_data["montant_users"], 0)
                         data_ab['montant_ht'] = round(serialized_data["montant_ht"], 0)
-                        # data_ab['montant_taxe'] = round(serialized_data["montant_taxe"], 0)
                         data_ab['montant_ttc'] = round(serialized_data["montant_ttc"], 0)
                         data_ab['montant_verse'] = reab.montant_verse
                         data_ab['montant_restant'] = round(serialized_data["montant_restant"], 0)

@@ -45,10 +45,10 @@ else:
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://mgpa.app',
-    'https://www.mgpa.app',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://mgpa.app',
+#     'https://www.mgpa.app',
+# ]
 
 # ALLOWED_HOSTS = ['*']
 
